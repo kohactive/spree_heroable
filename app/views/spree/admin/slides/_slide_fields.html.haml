@@ -1,0 +1,20 @@
+.nested-fields.product-slide{id: "spree_#{dom_id(f.object)}"}
+
+  .inputs
+    = f.label :title
+    = f.text_field :title
+
+    = f.label :body
+    = f.text_area :body
+
+    .product-slide-attachment
+      - if f.object.image.present?
+        = link_to image_tag(f.object.image.attachment(:mini), class: "pull-left"), f.object.image.attachment.to_s, target: "_blank"
+
+      .product-slide-uploader
+        = f.fields_for :image, (f.object.build_image unless f.object.image.present?) do |i|
+          = i.file_field :attachment
+
+  .actions
+    = f.number_field :sort_order, class: "product-slide-sort-order"
+    = link_to_remove_association "Remove Feature", f, class: "button button-danger"

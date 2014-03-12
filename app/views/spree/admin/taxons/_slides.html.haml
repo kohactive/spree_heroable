@@ -1,0 +1,49 @@
+#product-slides-table.twelve.columns.alpha.omega.taxon-slides-wrapper
+
+  %h3 Slides
+
+  #product-slides.product-slides
+    = f.fields_for :slides, (f.object.slides.build unless f.object.slides.present?) do |fa|
+      = render 'spree/admin/slides/slide_fields', f: fa
+
+    #product-slides-list
+
+  .product-slides-actions
+    = link_to_add_association "Add Product Slide", f, :slides, class: 'icon-plus button pull-left button-default', :'data-association-insertion-node' => '#product-slides-list', partial: 'spree/admin/slides/slide_fields'
+
+
+
+
+:javascript
+
+  $(document).ready(function() {
+    
+    bind_sorting();
+
+    $('#product-slides').on('cocoon:after-insert', function(e, insertedItem) {
+      sort_items();
+      bind_sorting();
+    });
+  });
+
+
+  bind_sorting = function() {
+    $('#product-slides').sortable({
+      items: '> .product-slide',
+      distance: 50,
+      tolerance: 'pointer',
+      placeholder: 'sortable-placeholder',
+
+      update: function(event, ui) {
+        sort_items();
+      },
+    });
+  };
+
+  sort_items = function() {
+    $('input.product-slide-sort-order', $('#product-slides')).each(function(index) {
+      $(this).val(index);
+    });
+  }
+
+
