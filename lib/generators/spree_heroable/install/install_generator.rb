@@ -4,6 +4,18 @@ module SpreeHeroable
 
       class_option :auto_run_migrations, :type => :boolean, :default => false
 
+      def add_javascripts
+        if File.exist?('app/assets/javascripts/admin/all.js')
+          append_file 'app/assets/javascripts/admin/all.js', "//= require admin/spree_heroable\n"
+        end
+      end
+
+      def add_stylesheets
+        if File.exist?('app/assets/stylesheets/admin/all.css')
+          inject_into_file 'app/assets/stylesheets/admin/all.css', " *= require admin/spree_heroable\n", :before => /\*\//, :verbose => true
+        end
+      end
+
       def add_migrations
         run 'bundle exec rake railties:install:migrations FROM=spree_heroable'
       end

@@ -1,0 +1,25 @@
+<div class="nested-fields product-slide" id="spree_<%= dom_id(f.object) %>" data-hook="product_slide">
+  <div class="inputs" data-hook="product_slide_fields">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+    <div class="product-slide-attachment" data-hook="attachment">
+      <div class="attachment-wrapper">
+        <% if f.object.image.present? %>
+          <%= link_to image_tag(f.object.image.attachment(:mini), class: "pull-left"), f.object.image.attachment.to_s, target: "_blank" %>
+        <% end %>
+        <div class="product-slide-uploader" data-hook="file">
+          <%= f.fields_for :image, (f.object.build_image unless f.object.image.present?) do |i| %>
+            <%= label_tag :attachment, "Slide Image" %>
+            <%= i.file_field :attachment %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.number_field :sort_order, class: "product-slide-sort-order" %>
+    <%= link_to_remove_association "Remove Feature", f, class: "button button-danger" %>
+  </div>
+</div>
