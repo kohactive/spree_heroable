@@ -7,6 +7,6 @@ Deface::Override.new(virtual_path: "spree/admin/shared/_product_tabs",
 
 Deface::Override.new(virtual_path: "spree/admin/taxons/_form",
                      name: "admin_taxon_slides_form",
-                     insert_bottom: "[data-hook='admin_inside_taxon_form']",
+                     insert_after: "[data-hook='admin_inside_taxon_form']",
                      partial: "spree/admin/taxons/slides",
                      disabled: false)
