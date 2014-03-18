@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_heroable'
-  s.version     = '2.1.6'
+  s.version     = '0.1.1'
   s.summary     = 'Add Hero banners and slider to your products and taxons'
   s.description = 'Add Hero banners and slider to your products and taxons'
   s.required_ruby_version = '>= 1.9.3'
