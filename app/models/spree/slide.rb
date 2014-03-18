@@ -3,7 +3,7 @@ module Spree
 
     belongs_to :heroable, polymorphic: true
     has_one :image, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Spree::Image"
-    accepts_nested_attributes_for :image, reject_if: proc {|attributes| attributes['attachment'].nil? and attributes['id'].nil?}, allow_destroy: true
+    accepts_nested_attributes_for :image, reject_if: lambda {|attributes| attributes['attachment'].blank? and attributes['id'].blank?}, allow_destroy: true
 
     before_save :set_sort_order
 
